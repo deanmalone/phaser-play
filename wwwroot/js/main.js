@@ -18,6 +18,7 @@ window.onload = function() {
     var layer;
     var player;
     var cursors;
+    var virtualcontroller = {};
 
     function preload() {
 
@@ -30,6 +31,10 @@ window.onload = function() {
         game.load.image('tiles', 'assets/images/tiles.png');
         game.load.spritesheet("player","assets/images/player.png",32,48);
         game.load.tilemap('map', 'assets/images/map.json', null, Phaser.Tilemap.TILED_JSON);
+
+        game.load.spritesheet('buttonleft', 'assets/images/button-round.png',96,96);
+        game.load.spritesheet('buttonright', 'assets/images/button-round.png',96,96);
+        game.load.spritesheet('buttonjump', 'assets/images/button-round-a.png',96,96)
 
     }
 
@@ -70,9 +75,31 @@ window.onload = function() {
         player.inputEnabled = true;
         player.body.collideWorldBounds = true;
         
-
-        // setup keyboard input
+        // setup keyboard input (for desktop)
         cursors = game.input.keyboard.createCursorKeys();
+
+        // setup virtual game controller buttons (for mobile)
+        var buttonjump = game.add.button(w - 100, h -100, 'buttonjump', null, this, 0, 1, 0, 1);  //game, x, y, key, callback, callbackContext, overFrame, outFrame, downFrame, upFrame
+        buttonjump.fixedToCamera = true;  //our buttons should stay on the same place  
+        buttonjump.events.onInputOver.add(function(){virtualcontroller.jump=true;});
+        buttonjump.events.onInputOut.add(function(){virtualcontroller.jump=false;});
+        buttonjump.events.onInputDown.add(function(){virtualcontroller.jump=true;});
+        buttonjump.events.onInputUp.add(function(){virtualcontroller.jump=false;});        
+
+        var buttonleft = game.add.button(0, h-100, 'buttonleft', null, this, 0, 1, 0, 1);
+        buttonleft.fixedToCamera = true;
+        buttonleft.events.onInputOver.add(function(){virtualcontroller.left=true;});
+        buttonleft.events.onInputOut.add(function(){virtualcontroller.left=false;});
+        buttonleft.events.onInputDown.add(function(){virtualcontroller.left=true;});
+        buttonleft.events.onInputUp.add(function(){virtualcontroller.left=false;});
+
+        var buttonright = game.add.button(128, h-100, 'buttonright', null, this, 0, 1, 0, 1);
+        buttonright.fixedToCamera = true;
+        buttonright.events.onInputOver.add(function(){virtualcontroller.right=true;});
+        buttonright.events.onInputOut.add(function(){virtualcontroller.right=false;});
+        buttonright.events.onInputDown.add(function(){virtualcontroller.right=true;});
+        buttonright.events.onInputUp.add(function(){virtualcontroller.right=false;});
+
     }
 
 
@@ -84,13 +111,13 @@ window.onload = function() {
         //  Reset the players velocity (movement)
         player.body.velocity.x = 0;
 
-        if (cursors.left.isDown)
+        if (cursors.left.isDown || virtualcontroller.left)
         {
             //  Move to the left
             player.body.velocity.x = -150;
             player.animations.play('left');
         }
-        else if (cursors.right.isDown)
+        else if (cursors.right.isDown || virtualcontroller.right)
         {
             //  Move to the right
             player.body.velocity.x = 150;
@@ -104,7 +131,7 @@ window.onload = function() {
         }
         
         //  Allow the player to jump if they are touching the ground.
-        if (cursors.up.isDown && player.body.onFloor())
+        if ((cursors.up.isDown || virtualcontroller.jump) && player.body.onFloor())
         {
             player.body.velocity.y = -400;
         }
