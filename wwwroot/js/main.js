@@ -13,6 +13,8 @@ window.onload = function() {
 	}
 	
 	var game = new Phaser.Game(w, h, Phaser.AUTO, '', { preload: preload, create: create, update,update });
+    var score = 0;
+    var scoreText;
     var sky;
     var map;
     var layer;
@@ -75,6 +77,10 @@ window.onload = function() {
         player.inputEnabled = true;
         player.body.collideWorldBounds = true;
         
+        // display a score
+        scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '24px', fill: '#ffe' });
+        scoreText.fixedToCamera = true; 
+
         // setup keyboard input (for desktop)
         cursors = game.input.keyboard.createCursorKeys();
 
@@ -134,7 +140,15 @@ window.onload = function() {
         if ((cursors.up.isDown || virtualcontroller.jump) && player.body.onFloor())
         {
             player.body.velocity.y = -400;
+
+
+                    //  Add and update the score
+            score += 10;
+            scoreText.text = 'Score: ' + score;
         }
+
+
+
 
     }
 
