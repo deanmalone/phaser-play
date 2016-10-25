@@ -18,6 +18,7 @@ window.onload = function() {
     var sky;
     var map;
     var layer;
+    var items;
     var player;
     var cursors;
     var virtualcontroller = {};
@@ -36,7 +37,9 @@ window.onload = function() {
 
         game.load.spritesheet('buttonleft', 'assets/images/button-round.png',96,96);
         game.load.spritesheet('buttonright', 'assets/images/button-round.png',96,96);
-        game.load.spritesheet('buttonjump', 'assets/images/button-round-a.png',96,96)
+        game.load.spritesheet('buttonjump', 'assets/images/button-round-a.png',96,96);
+
+        game.load.image('star', 'assets/images/star.png');
 
     }
 
@@ -58,11 +61,20 @@ window.onload = function() {
 
         // Creates a layer from the World layer in the map data.
         // A Layer is effectively like a Phaser.Sprite, so is added to the display list.
-        layer = map.createLayer('world');
-        map.setCollisionBetween(1, 156); // all sprites are 
+        layer = map.createLayer("background");
+        map.setCollisionBetween(1, 156, true, "background", true); // all sprites are 
 
         // This resizes the game world to match the layer dimensions
         layer.resizeWorld();
+
+        map.createLayer("foreground");
+
+        // add the stars, based on object layer
+        items = game.add.group(game.world,'mygroup',false,true,Phaser.Physics.ARCADE);
+        var stars = map.objects["items"];
+        for (var i in stars) {
+            items.create(stars[i].x, stars[i].y - 32, 'star'); // need to confirm positioning...
+        }
 
         // The player and its settings
         player = game.add.sprite(100, 100, 'player');
@@ -114,6 +126,9 @@ window.onload = function() {
         //  Collide the player and the layer
         game.physics.arcade.collide(player, layer);
 
+        //  Check if player has collected any stars
+        game.physics.arcade.overlap(player, items, collisionHandler, null, this);
+        
         //  Reset the players velocity (movement)
         player.body.velocity.x = 0;
 
@@ -140,15 +155,21 @@ window.onload = function() {
         if ((cursors.up.isDown || virtualcontroller.jump) && player.body.onFloor())
         {
             player.body.velocity.y = -400;
-
-
-                    //  Add and update the score
-            score += 10;
-            scoreText.text = 'Score: ' + score;
         }
+    }
 
+    function collisionHandler (player, item) {
+        
+        console.log("collisionHandler");
 
+        // remove the star
+        item.kill();
 
+        //  Update the score
+        score += 10;
+        scoreText.text = 'Score: ' + score;
+
+        return true;
 
     }
 

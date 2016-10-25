@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="10" tilewidth="70" tileheight="70" nextobjectid="35">
+ <tileset firstgid="1" name="tiles" tilewidth="70" tileheight="70" spacing="2" tilecount="156" columns="12">
+  <image source="tiles.png" width="864" height="936"/>
+  <tile id="103">
+   <objectgroup draworder="index">
+    <object id="4" x="-1.25" y="-2" width="74.25" height="33.5"/>
+   </objectgroup>
+  </tile>
+ </tileset>
+ <layer name="background" width="20" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,104,104,104,104,104,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,104,104,104,104,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,104,104,104,104,0,0,0,0,0,0,
+0,0,104,104,104,104,104,0,0,0,0,0,104,104,104,104,104,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+104,104,104,104,104,104,104,104,104,104,104,104,104,104,104,104,104,104,104,104
+</data>
+ </layer>
+ <layer name="foreground" width="20" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+41,0,0,0,0,0,0,0,0,77,0,0,0,0,0,0,0,0,0,65,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="items">
+  <object id="9" gid="38" x="283" y="631" width="70" height="70"/>
+  <object id="10" gid="38" x="912" y="630" width="70" height="70"/>
+  <object id="11" gid="38" x="141" y="421" width="70" height="70"/>
+  <object id="12" gid="38" x="141" y="421" width="70" height="70"/>
+  <object id="13" gid="38" x="213" y="354" width="70" height="70"/>
+  <object id="14" gid="38" x="213" y="354" width="70" height="70"/>
+  <object id="15" gid="38" x="343" y="350" width="70" height="70"/>
+  <object id="16" gid="38" x="416" y="348" width="70" height="70"/>
+  <object id="17" gid="38" x="488" y="352" width="70" height="70"/>
+  <object id="18" gid="38" x="489" y="205" width="70" height="70"/>
+  <object id="19" gid="38" x="555" y="206" width="70" height="70"/>
+  <object id="20" gid="38" x="625" y="206" width="70" height="70"/>
+  <object id="23" gid="38" x="842" y="417" width="70" height="70"/>
+  <object id="24" gid="38" x="1054" y="420" width="70" height="70"/>
+  <object id="25" gid="38" x="1125" y="419" width="70" height="70"/>
+  <object id="26" gid="38" x="1191" y="417" width="70" height="70"/>
+  <object id="27" gid="38" x="1262" y="562" width="70" height="70"/>
+  <object id="28" gid="38" x="1056" y="631" width="70" height="70"/>
+  <object id="29" gid="38" x="491" y="629" width="70" height="70"/>
+  <object id="30" gid="38" x="701" y="629" width="70" height="70"/>
+  <object id="31" gid="38" x="775" y="630" width="70" height="70"/>
+  <object id="32" gid="38" x="774" y="419" width="70" height="70"/>
+  <object id="33" gid="38" x="702" y="135" width="70" height="70"/>
+  <object id="34" gid="38" x="421" y="139" width="70" height="70"/>
+ </objectgroup>
+</map>
