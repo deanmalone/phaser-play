@@ -160,16 +160,29 @@ window.onload = function() {
 
     function collisionHandler (player, item) {
         
-        console.log("collisionHandler");
+        if(!item.isCollected){
 
-        // remove the star
-        item.kill();
+            item.isCollected = true;
 
-        //  Update the score
-        score += 10;
-        scoreText.text = 'Score: ' + score;
+            // Update the score
+            score += 10;
+            scoreText.text = 'Score: ' + score;
 
-        return true;
+            // setup animation for item to disappear
+            game.add.tween(item).to({
+                y : item.y - 60
+            }, 750, "Expo.easeOut", true);
+
+            game.add.tween(item.scale).to({
+                x : 2,
+                y : 2
+            }, 750, "Linear", true);
+
+            game.add.tween(item).to({
+                alpha : 0.1
+            }, 750, "Linear", true).onComplete.add(item.kill, item);
+
+        }
 
     }
 
